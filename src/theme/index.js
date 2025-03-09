@@ -69,6 +69,15 @@ export const lightTheme = createTheme({
         },
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          paddingRight: 20,
+          paddingLeft: 20,
+          borderRadius: 8,
+        },
+      },
+    },
   },
 });
 
@@ -86,15 +95,17 @@ export const darkTheme = createTheme({
       dark: '#000000',
     },
     background: {
-      default: '#121212',
-      paper: '#1E1E1E',
+      // default: '#121212',
+      default: '#141A21',
+      // paper: '#1E1E1E',
+      paper: '#1C252E',
     },
   },
   components: {
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: '#212121',
+          backgroundColor: '#141A21',
         },
       },
     },
@@ -139,6 +150,15 @@ export const darkTheme = createTheme({
           '& > :not(:first-of-type)': {
             marginLeft: 12,
           },
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          paddingRight: 20,
+          paddingLeft: 20,
+          borderRadius: 8,
         },
       },
     },

@@ -7,7 +7,8 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import IconButton from '@mui/material/IconButton';
 
-import useBoolean from '../../hooks/use-boolean';
+import { useBoolean, useRouter } from '../../hooks';
+
 import Iconify from '../../components/iconify/iconify';
 import ConfirmDialog from '../../components/confirm-dialog/confirm-dialog';
 
@@ -18,6 +19,8 @@ const TeachersTableRow = ({ tableData }) => {
 
   const confirmDelete = useBoolean();
 
+  const router = useRouter();
+
   const handleDelete = useCallback(async () => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
@@ -26,6 +29,10 @@ const TeachersTableRow = ({ tableData }) => {
     } catch (error) {
       console.log(error);
     }
+  }, []);
+
+  const handleEdit = useCallback(() => {
+    router.push(`/edit-teacher/${id}`);
   }, []);
 
   return (
@@ -41,7 +48,7 @@ const TeachersTableRow = ({ tableData }) => {
 
         <TableCell align="right">
           <Tooltip title="Edit Details" placement="top">
-            <IconButton color="inherit" onClick={() => handleEdit(id)}>
+            <IconButton color="inherit" onClick={handleEdit}>
               <Iconify icon="solar:pen-bold" />
             </IconButton>
           </Tooltip>
