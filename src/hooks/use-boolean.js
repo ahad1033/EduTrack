@@ -2,14 +2,12 @@ import { useCallback, useState } from 'react';
 
 // ------------------------------------------------------------
 
-export default function useBoolean(initialValues = false) {
-  const [value, setValue] = useState(initialValues);
+export default function useBoolean(initialValues) {
+  const [value, setValue] = useState(!!initialValues);
 
-  const onTrue =
-    (useCallback(() => {
-      setValue(true);
-    }),
-    []);
+  const onTrue = useCallback(() => {
+    setValue(true);
+  }, []);
 
   const onFalse = useCallback(() => {
     setValue(false);

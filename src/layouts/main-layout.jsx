@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 
-import { SIDEBAR } from './config-layout';
+import { HEADER, SIDEBAR } from './config-layout';
 import { Header, Sidebar } from '../components/common';
 import { lightTheme, darkTheme } from '../theme/index.js';
 
@@ -18,8 +18,6 @@ const MainLayout = () => {
   const miniDrawerWidth = SIDEBAR.miniDrawerWidth;
 
   const theme = useTheme();
-
-  console.log('theme: ', theme);
 
   // Check if we're on mobile
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -70,7 +68,15 @@ const MainLayout = () => {
             alignItems: 'center',
           }}
         >
-          <Box sx={{ width: '100%', margin: 'auto', maxWidth: '1400px' }}>
+          <Box
+            sx={{
+              width: '100%',
+              margin: 'auto',
+              maxWidth: '1400px',
+              mt: `${HEADER.headerHeight}px`,
+              backgroundColor: theme.palette.background.default
+            }}
+          >
             <Outlet />
           </Box>
         </Box>

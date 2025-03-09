@@ -1,13 +1,15 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Analytics from './pages/Analytics';
-import Teachers from './pages/Teachers';
 import { MainLayout } from './layouts';
+import Analytics from './pages/analytics/analytics-page';
+import Teachers from './pages/teachers/teachers-list';
 
 // ------------------------------------------------------------
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{
+      v7_startTransition: true,
+    }}>
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Analytics />} />

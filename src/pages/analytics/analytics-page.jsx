@@ -7,12 +7,12 @@ import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 
 import {
-  PeopleAlt as StudentsIcon,
-  School as TeachersIcon,
   Class as ClassesIcon,
+  School as TeachersIcon,
   AttachMoney as FeesIcon,
+  PeopleAlt as StudentsIcon,
 } from '@mui/icons-material';
-import CustomHelmet from '../components/custom-components/helmet/custom-helmet';
+import CustomHelmet from '../../components/custom-components/helmet/custom-helmet';
 
 // ------------------------------------------------------------
 

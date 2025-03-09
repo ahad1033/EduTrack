@@ -15,7 +15,7 @@ import {
   Notifications as NotificationsIcon,
 } from '@mui/icons-material';
 
-import { SIDEBAR } from '../../layouts/config-layout';
+import { HEADER, SIDEBAR } from '../../layouts/config-layout';
 
 // ------------------------------------------------------------
 
@@ -30,6 +30,7 @@ const Header = ({ open, toggleDrawer, toggleTheme }) => {
         width: {
           sm: `calc(100% - ${open ? SIDEBAR.drawerWidth : SIDEBAR.miniDrawerWidth}px)`,
         },
+        height: HEADER.headerHeight,
         ml: { sm: `${open ? 240 : 0}px` },
       }}
     >

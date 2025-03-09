@@ -4,24 +4,16 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import Button from '@mui/material/Button';
-import TableRow from '@mui/material/TableRow';
-import TableHead from '@mui/material/TableHead';
-import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
 import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import {
-  Add as AddIcon,
-  Edit as EditIcon,
-  Delete as DeleteIcon,
-  Search as SearchIcon,
-} from '@mui/icons-material';
-
-import CustomHelmet from '../components/custom-components/helmet/custom-helmet';
+import CustomTableHead from '../../components/table/custom-table-head';
+import CustomHelmet from '../../components/custom-components/helmet/custom-helmet';
+import TeachersTableRow from './teachers-table-row';
+import Iconify from '../../components/iconify/iconify';
 
 // ------------------------------------------------------------
 
@@ -65,6 +57,15 @@ const Teachers = () => {
     },
   ];
 
+  // Define table columns
+  const columns = [
+    { id: 'name', label: 'Name' },
+    { id: 'subject', label: 'Subject' },
+    { id: 'phone', label: 'Phone' },
+    { id: 'email', label: 'Email' },
+    { id: 'actions', label: 'Actions', align: 'right' },
+  ];
+
   const handleEdit = (id) => {
     toast.success(`Edit teacher with ID: ${id}`);
   };
@@ -91,9 +92,10 @@ const Teachers = () => {
       >
         <Typography variant="h4">Teachers Management</Typography>
         <Button
-          variant="contained"
-          startIcon={<AddIcon />}
+          variant="outlined"
+          startIcon={<Iconify icon="mingcute:add-line" />}
           onClick={handleAdd}
+          sx={{ paddingY: 1, paddingX:2 }}
         >
           Add Teacher
         </Button>
@@ -106,7 +108,10 @@ const Teachers = () => {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <SearchIcon />
+                <Iconify
+                  icon="eva:search-fill"
+                  sx={{ color: 'text.disabled' }}
+                />
               </InputAdornment>
             ),
           }}
@@ -115,37 +120,11 @@ const Teachers = () => {
 
       <TableContainer component={Paper} elevation={3}>
         <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Subject</TableCell>
-              <TableCell>Phone</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell align="right">Actions</TableCell>
-            </TableRow>
-          </TableHead>
+          <CustomTableHead columns={columns} />
+
           <TableBody>
             {teachers.map((teacher) => (
-              <TableRow key={teacher.id}>
-                <TableCell>{teacher.name}</TableCell>
-                <TableCell>{teacher.subject}</TableCell>
-                <TableCell>{teacher.phone}</TableCell>
-                <TableCell>{teacher.email}</TableCell>
-                <TableCell align="right">
-                  <IconButton
-                    color="primary"
-                    onClick={() => handleEdit(teacher.id)}
-                  >
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton
-                    color="error"
-                    onClick={() => handleDelete(teacher.id)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
+              <TeachersTableRow key={teacher.id} tableData={teacher} />
             ))}
           </TableBody>
         </Table>
