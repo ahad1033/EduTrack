@@ -40,7 +40,7 @@ const Sidebar = ({ open, drawerWidth = 240, miniDrawerWidth = 65, toggleDrawer }
   const getDrawerStyle = () => {
     if (isMobile) {
       return {
-        display: open ? 'block' : 'none',
+        // display: open ? 'block' : 'none',
         '& .MuiDrawer-paper': {
           width: drawerWidth,
           boxSizing: 'border-box',
@@ -48,6 +48,7 @@ const Sidebar = ({ open, drawerWidth = 240, miniDrawerWidth = 65, toggleDrawer }
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
           }),
+          transform: !open && `translateX(-100%)`,
         },
       };
     } else {
