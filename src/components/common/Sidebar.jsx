@@ -23,15 +23,24 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 // ------------------------------------------------------------
 
-const Sidebar = ({ open, drawerWidth = 240, miniDrawerWidth = 65, toggleDrawer }) => {
+const Sidebar = ({
+  open,
+  drawerWidth = 240,
+  miniDrawerWidth = 65,
+  toggleDrawer,
+}) => {
   const navigate = useNavigate();
+
   const location = useLocation();
+
   const theme = useTheme();
+
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const menuItems = [
     { text: 'Analytics', icon: <DashboardIcon />, path: '/' },
     { text: 'Teachers', icon: <TeachersIcon />, path: '/teachers' },
+    { text: 'Students', icon: <TeachersIcon />, path: '/students' },
     { text: 'Classes', icon: <ClassesIcon />, path: '/classes' },
     { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
   ];
@@ -86,7 +95,7 @@ const Sidebar = ({ open, drawerWidth = 240, miniDrawerWidth = 65, toggleDrawer }
           display: 'flex',
           alignItems: 'center',
           justifyContent: open ? 'flex-start' : 'center',
-          transition: 'justify-content 0.3s ease', // Add transition for justify content
+          transition: 'justify-content 0.3s ease',
         }}
       >
         <SchoolIcon color="primary" sx={{ marginY: 0.5 }} />
@@ -95,6 +104,7 @@ const Sidebar = ({ open, drawerWidth = 240, miniDrawerWidth = 65, toggleDrawer }
             EduTrack
           </Typography>
         )}
+
         {/* Toggle button for mobile view */}
         {isMobile && (
           <IconButton onClick={toggleDrawer} sx={{ marginLeft: 'auto' }}>
@@ -128,7 +138,20 @@ const Sidebar = ({ open, drawerWidth = 240, miniDrawerWidth = 65, toggleDrawer }
               >
                 {item.icon}
               </ListItemIcon>
-              {open && <ListItemText primary={item.text} />}
+              {open && (
+                <ListItemText
+                  primaryTypographyProps={{
+                    sx: {
+                      color:
+                        location.pathname === item.path
+                          ? 'primary.main'
+                          : 'inherit',
+                      fontWeight: location.pathname === item.path && 600,
+                    },
+                  }}
+                  primary={item.text}
+                />
+              )}
             </ListItemButton>
           </ListItem>
         ))}

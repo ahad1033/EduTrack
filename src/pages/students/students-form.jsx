@@ -7,58 +7,72 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+// import MenuItem from '@mui/material/MenuItem';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { FormProvider, RHFTextField } from '../../components/hook-form';
+import {
+  RHFSelect,
+  RHFTextField,
+  FormProvider,
+} from '../../components/hook-form';
 
-import { TEACHERS_DATA } from '../../_mock/teachersData';
-import CustomCardHeader from '../../components/custom-components/card-header/custom-card-header';
 import { useRouter } from '../../hooks';
+
+import {
+  CLASS_OPTIONS,
+  GENDER_OPTIONS,
+  STUDENTS_DATA,
+} from '../../_mock/studentsData';
+
 import Iconify from '../../components/iconify/iconify';
+import CustomCardHeader from '../../components/custom-components/card-header/custom-card-header';
+import { MenuItem } from '@mui/material';
 
 // ----------------------------------------------------------------------
-const TeachersSchema = Yup.object().shape({
+const StudentsSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
-  email: Yup.string().email('Email is invalid').required('Email is required'),
+  gender: Yup.string().required('Gender is required'),
+  fathersName: Yup.string().required('Fathers Name is required'),
+  mothersName: Yup.string().required('Mothers Name is required'),
   phone: Yup.string().required('Phone is required'),
-  subject: Yup.string().required('Subject is required'),
+  class: Yup.string().required('Class is required'),
   address: Yup.string(),
 });
 
 // ----------------------------------------------------------------------
 
-const TeachersForm = () => {
-  const { id: teacherId } = useParams();
+const StudentsForm = () => {
+  const { id: studentId } = useParams();
 
   const router = useRouter();
 
-  const isEditMode = !!teacherId;
+  const isEditMode = !!studentId;
 
-  const currentTeacher = useMemo(() => {
+  const currentStudent = useMemo(() => {
     if (isEditMode) {
-      return TEACHERS_DATA.find((teacher) => teacher.id === Number(teacherId));
+      return STUDENTS_DATA.find((student) => student.id === Number(studentId));
     } else {
       return {};
     }
-  }, [isEditMode, teacherId]);
-
-  console.log(isEditMode);
+  }, [isEditMode, studentId]);
 
   const defaultValues = useMemo(
     () => ({
-      name: currentTeacher.name || '',
-      email: currentTeacher.email || '',
-      phone: currentTeacher.phone || '',
-      subject: currentTeacher.subject || '',
-      address: currentTeacher.address || '',
+      name: currentStudent.name || '',
+      gender: currentStudent.gender || '',
+      fathersName: currentStudent.fathersName || '',
+      mothersName: currentStudent.mothersName || '',
+      phone: currentStudent.phone || '',
+      class: currentStudent.class || '',
+      address: currentStudent.address || '',
     }),
-    [currentTeacher]
+    [currentStudent]
   );
 
   const methods = useForm({
-    resolver: yupResolver(TeachersSchema),
+    resolver: yupResolver(StudentsSchema),
     defaultValues,
   });
 
@@ -74,10 +88,11 @@ const TeachersForm = () => {
   return (
     <>
       <CustomCardHeader
-        title={isEditMode ? 'Edit Teacher' : 'Add Teacher'}
+        title={isEditMode ? 'Edit Student' : 'Add Student'}
         action={
           <Button
             variant="outlined"
+            color="inherit"
             startIcon={<Iconify icon="mingcute:arrow-left-line" />}
             onClick={router.back}
           >
@@ -93,7 +108,13 @@ const TeachersForm = () => {
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <RHFTextField name="email" label="Email" fullWidth />
+              <RHFSelect name="gender" label="Gender">
+                {GENDER_OPTIONS.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.lavel}
+                  </MenuItem>
+                ))}
+              </RHFSelect>
             </Grid>
 
             <Grid item xs={12} md={6}>
@@ -101,7 +122,21 @@ const TeachersForm = () => {
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <RHFTextField name="subject" label="Subject" fullWidth />
+              <RHFTextField name="fathersName" label="Fathers Name" fullWidth />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <RHFTextField name="mothersName" label="Mothers Name" fullWidth />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <RHFSelect name="class" label="Class">
+                {CLASS_OPTIONS.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.lavel}
+                  </MenuItem>
+                ))}
+              </RHFSelect>
             </Grid>
 
             <Grid item xs={12}>
@@ -130,4 +165,4 @@ const TeachersForm = () => {
   );
 };
 
-export default TeachersForm;
+export default StudentsForm;

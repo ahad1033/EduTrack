@@ -17,6 +17,10 @@ export const lightTheme = createTheme({
       default: '#F8F9FA',
       paper: '#FFFFFF',
     },
+    text: {
+      primary: '#000000',
+      secondary: '#555555',
+    },
   },
   components: {
     MuiAppBar: {
@@ -95,10 +99,12 @@ export const darkTheme = createTheme({
       dark: '#000000',
     },
     background: {
-      // default: '#121212',
       default: '#141A21',
-      // paper: '#1E1E1E',
       paper: '#1C252E',
+    },
+    text: {
+      primary: '#FFFFFF',
+      secondary: '#CCCCCC',
     },
   },
   components: {

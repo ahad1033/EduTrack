@@ -10,11 +10,11 @@ const CustomCardHeader = ({
 }) => {
   return (
     <CardHeader
-      sx={{ ...sx, mb: 3 }}
       title={title}
       action={action}
       subheader={subheader}
-      titleTypographyProps={{ variant: 'h4' }}
+      sx={{ ...sx, mb: 3, color: 'text.primary' }}
+      titleTypographyProps={{ variant: 'h4', fontWeight: 500 }}
     />
   );
 };

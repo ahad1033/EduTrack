@@ -3,16 +3,17 @@ import { Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { ThemeProvider, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 
 import { HEADER, SIDEBAR } from './config-layout';
 import { Header, Sidebar } from '../components/common';
-import { lightTheme, darkTheme } from '../theme/index.js';
+import { useThemeMode } from '../theme/ThemeProvider';
 
 const MainLayout = () => {
   const [open, setOpen] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isDarkMode, toggleTheme } = useThemeMode();
 
   const drawerWidth = SIDEBAR.drawerWidth;
   const miniDrawerWidth = SIDEBAR.miniDrawerWidth;
@@ -31,67 +32,66 @@ const MainLayout = () => {
     setOpen(!open);
   };
 
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
   return (
-    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-      <Box sx={{ display: 'flex' }}>
-        <Header
-          open={open}
-          toggleDrawer={toggleDrawer}
-          toggleTheme={toggleTheme}
-        />
-        <Sidebar
-          open={open}
-          toggleDrawer={toggleDrawer}
-          drawerWidth={drawerWidth}
-          miniDrawerWidth={miniDrawerWidth}
-        />
+    <Box
+      sx={{
+        display: 'flex',
+        backgroundColor: theme.palette.background.default,
+        minHeight: '100vh',
+      }}
+    >
+      <Header
+        open={open}
+        toggleDrawer={toggleDrawer}
+        toggleTheme={toggleTheme}
+        isDarkMode={isDarkMode}
+      />
+      <Sidebar
+        open={open}
+        toggleDrawer={toggleDrawer}
+        drawerWidth={drawerWidth}
+        miniDrawerWidth={miniDrawerWidth}
+      />
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: {
+            xs: '100%',
+            sm: `calc(100% - ${open ? drawerWidth : miniDrawerWidth}px)`,
+          },
+          transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+          }),
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
         <Box
-          component="main"
           sx={{
-            flexGrow: 1,
-            p: 3,
-            width: {
-              xs: '100%',
-              sm: `calc(100% - ${open ? drawerWidth : miniDrawerWidth}px)`,
-            },
-            transition: (theme) =>
-              theme.transitions.create(['margin', 'width'], {
-                easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen,
-              }),
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            width: '100%',
+            margin: 'auto',
+            maxWidth: '1400px',
+            mt: `${HEADER.headerHeight}px`,
           }}
         >
-          <Box
-            sx={{
-              width: '100%',
-              margin: 'auto',
-              maxWidth: '1400px',
-              mt: `${HEADER.headerHeight}px`,
-              backgroundColor: theme.palette.background.default
-            }}
-          >
-            <Outlet />
-          </Box>
+          <Outlet />
         </Box>
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            style: {
-              background: isDarkMode ? '#333' : '#fff',
-              color: isDarkMode ? '#fff' : '#333',
-            },
-            duration: 3000,
-          }}
-        />
       </Box>
-    </ThemeProvider>
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          style: {
+            background: isDarkMode ? '#333' : '#fff',
+            color: isDarkMode ? '#fff' : '#333',
+          },
+          duration: 3000,
+        }}
+      />
+    </Box>
   );
 };
 

@@ -1,5 +1,3 @@
-import toast from 'react-hot-toast';
-
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Table from '@mui/material/Table';
@@ -11,38 +9,32 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 import { useRouter } from '../../hooks';
 
-import { TEACHERS_DATA } from '../../_mock/teachersData';
-
-import TeachersTableRow from './teachers-table-row';
+import StudentsTableRow from './students-table-row';
 import Iconify from '../../components/iconify/iconify';
 import CustomTableHead from '../../components/table/custom-table-head';
 import CustomHelmet from '../../components/custom-components/helmet/custom-helmet';
 import CustomCardHeader from '../../components/custom-components/card-header/custom-card-header';
 
+import { STUDENTS_DATA } from '../../_mock/studentsData';
+
 // ------------------------------------------------------------
 
-const Teachers = () => {
+const StudentsList = () => {
   const router = useRouter();
 
   // Define table columns
   const columns = [
     { id: 'name', label: 'Name' },
-    { id: 'subject', label: 'Subject' },
-    { id: 'phone', label: 'Phone' },
-    { id: 'email', label: 'Email' },
+    { id: 'gender', label: 'Gender' },
+    { id: 'class', label: 'Class' },
+    { id: 'fathersName', label: 'Fathers name' },
+    { id: 'mothersName', label: 'Mothers name' },
+    { id: 'address', label: 'Address' },
     { id: 'actions', label: 'Actions', align: 'right' },
   ];
 
-  const handleEdit = (id) => {
-    toast.success(`Edit teacher with ID: ${id}`);
-  };
-
-  const handleDelete = (id) => {
-    toast.error(`Delete teacher with ID: ${id}`);
-  };
-
-  const handleAddTeacher = () => {
-    router.push('/create-teacher');
+  const handleAddStudent = () => {
+    router.push('/create-student');
   };
 
   return (
@@ -50,15 +42,15 @@ const Teachers = () => {
       <CustomHelmet title="Teachers List" />
 
       <CustomCardHeader
-        title="Teachers List"
+        title="Students List"
         action={
           <Button
             color="inherit"
             variant="outlined"
-            onClick={handleAddTeacher}
+            onClick={handleAddStudent}
             startIcon={<Iconify icon="mingcute:add-line" />}
           >
-            Add Teacher
+            Add Student
           </Button>
         }
       />
@@ -85,8 +77,8 @@ const Teachers = () => {
             <CustomTableHead columns={columns} />
 
             <TableBody>
-              {TEACHERS_DATA.map((teacher) => (
-                <TeachersTableRow key={teacher.id} tableData={teacher} />
+              {STUDENTS_DATA.map((teacher) => (
+                <StudentsTableRow key={teacher.id} tableData={teacher} />
               ))}
             </TableBody>
           </Table>
@@ -96,4 +88,4 @@ const Teachers = () => {
   );
 };
 
-export default Teachers;
+export default StudentsList;
