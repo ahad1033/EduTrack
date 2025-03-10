@@ -91,10 +91,10 @@ const StudentsForm = () => {
         title={isEditMode ? 'Edit Student' : 'Add Student'}
         action={
           <Button
-            variant="outlined"
             color="inherit"
-            startIcon={<Iconify icon="mingcute:arrow-left-line" />}
+            variant="outlined"
             onClick={router.back}
+            startIcon={<Iconify icon="mingcute:arrow-left-line" />}
           >
             Back
           </Button>
@@ -147,7 +147,7 @@ const StudentsForm = () => {
           <Stack direction="row" pt={3} justifyContent="flex-end">
             <LoadingButton
               type="submit"
-              color="primary"
+              color="success"
               variant="contained"
               loading={isSubmitting}
               disabled={isSubmitting}

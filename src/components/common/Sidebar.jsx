@@ -1,25 +1,28 @@
+import { useNavigate, useLocation } from 'react-router-dom';
+
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Drawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
+import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 
-import { useTheme, useMediaQuery, IconButton } from '@mui/material';
+import { useTheme, useMediaQuery } from '@mui/material';
+import { useThemeMode } from '../../theme/ThemeProvider';
 
 import {
-  Dashboard as DashboardIcon,
-  People as TeachersIcon,
-  School as SchoolIcon,
-  MenuBook as ClassesIcon,
-  Settings as SettingsIcon,
   Menu as MenuIcon,
   Close as CloseIcon,
+  School as SchoolIcon,
+  People as TeachersIcon,
+  MenuBook as ClassesIcon,
+  Settings as SettingsIcon,
+  Dashboard as DashboardIcon,
 } from '@mui/icons-material';
-import { useNavigate, useLocation } from 'react-router-dom';
 
 // ------------------------------------------------------------
 
@@ -34,6 +37,8 @@ const Sidebar = ({
   const location = useLocation();
 
   const theme = useTheme();
+
+  const { isDarkMode } = useThemeMode();
 
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -98,7 +103,7 @@ const Sidebar = ({
           transition: 'justify-content 0.3s ease',
         }}
       >
-        <SchoolIcon color="primary" sx={{ marginY: 0.5 }} />
+        <SchoolIcon color="success" sx={{ marginY: 0.5 }} />
         {open && (
           <Typography variant="h6" fontWeight="bold">
             EduTrack
@@ -112,7 +117,9 @@ const Sidebar = ({
           </IconButton>
         )}
       </Box>
+
       <Divider />
+
       <List sx={{ mt: 2 }}>
         {menuItems.map((item) => (
           <ListItem key={item.text} disablePadding>
@@ -125,7 +132,7 @@ const Sidebar = ({
                 px: 2.5,
                 '&.Mui-selected': {
                   borderRight: '3px solid',
-                  borderColor: 'primary.main',
+                  borderColor: 'success.main',
                 },
               }}
             >
@@ -134,6 +141,7 @@ const Sidebar = ({
                   minWidth: 0,
                   mr: open ? 3 : 'auto',
                   justifyContent: 'center',
+                  color: location.pathname === item.path && 'success.main',
                 }}
               >
                 {item.icon}
@@ -142,10 +150,7 @@ const Sidebar = ({
                 <ListItemText
                   primaryTypographyProps={{
                     sx: {
-                      color:
-                        location.pathname === item.path
-                          ? 'primary.main'
-                          : 'inherit',
+                      color: location.pathname === item.path && 'success.main',
                       fontWeight: location.pathname === item.path && 600,
                     },
                   }}

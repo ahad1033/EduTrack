@@ -3,16 +3,16 @@ import { createTheme } from '@mui/material/styles';
 export const lightTheme = createTheme({
   palette: {
     mode: 'light',
-    primary: {
-      main: '#1B5E20',
-      light: '#4C8C4A',
-      dark: '#003D00',
-    },
-    secondary: {
-      main: '#2E7D32',
-      light: '#60AD5E',
-      dark: '#005005',
-    },
+    // primary: {
+    //   main: '#1B5E20',
+    //   light: '#4C8C4A',
+    //   dark: '#003D00',
+    // },
+    // secondary: {
+    //   main: '#2E7D32',
+    //   light: '#60AD5E',
+    //   dark: '#005005',
+    // },
     background: {
       default: '#F8F9FA',
       paper: '#FFFFFF',
@@ -88,16 +88,16 @@ export const lightTheme = createTheme({
 export const darkTheme = createTheme({
   palette: {
     mode: 'dark',
-    primary: {
-      main: '#424242',
-      light: '#6D6D6D',
-      dark: '#1B1B1B',
-    },
-    secondary: {
-      main: '#212121',
-      light: '#484848',
-      dark: '#000000',
-    },
+    // primary: {
+    //   main: '#424242',
+    //   light: '#6D6D6D',
+    //   dark: '#1B1B1B',
+    // },
+    // secondary: {
+    //   main: '#212121',
+    //   light: '#484848',
+    //   dark: '#000000',
+    // },
     background: {
       default: '#141A21',
       paper: '#1C252E',
@@ -111,7 +111,8 @@ export const darkTheme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: '#141A21',
+          // backgroundColor: '#141A21',
+          backgroundColor: '#1B5E20',
         },
       },
     },

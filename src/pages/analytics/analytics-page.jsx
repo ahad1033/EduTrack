@@ -12,6 +12,7 @@ import {
   AttachMoney as FeesIcon,
   PeopleAlt as StudentsIcon,
 } from '@mui/icons-material';
+
 import CustomHelmet from '../../components/custom-components/helmet/custom-helmet';
 
 // ------------------------------------------------------------
@@ -22,25 +23,25 @@ const Analytics = () => {
     {
       title: 'Total Students',
       value: 1250,
-      icon: <StudentsIcon fontSize="large" color="primary" />,
+      icon: <StudentsIcon fontSize="large" color="success" />,
       change: '+5%',
     },
     {
       title: 'Total Teachers',
       value: 75,
-      icon: <TeachersIcon fontSize="large" color="primary" />,
+      icon: <TeachersIcon fontSize="large" color="success" />,
       change: '+2%',
     },
     {
       title: 'Total Classes',
       value: 45,
-      icon: <ClassesIcon fontSize="large" color="primary" />,
+      icon: <ClassesIcon fontSize="large" color="success" />,
       change: '0%',
     },
     {
       title: 'Fees Collected',
       value: '$125,000',
-      icon: <FeesIcon fontSize="large" color="primary" />,
+      icon: <FeesIcon fontSize="large" color="success" />,
       change: '+12%',
     },
   ];

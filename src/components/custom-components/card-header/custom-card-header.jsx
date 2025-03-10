@@ -13,7 +13,7 @@ const CustomCardHeader = ({
       title={title}
       action={action}
       subheader={subheader}
-      sx={{ ...sx, mb: 3, color: 'text.primary' }}
+      sx={{ ...sx, mb: 3, color: 'success.main' }}
       titleTypographyProps={{ variant: 'h4', fontWeight: 500 }}
     />
   );
