@@ -27,6 +27,7 @@ const StudentsList = () => {
     { id: 'name', label: 'Name' },
     { id: 'gender', label: 'Gender' },
     { id: 'class', label: 'Class' },
+    { id: 'roll', label: 'Roll' },
     { id: 'fathersName', label: 'Fathers name' },
     { id: 'mothersName', label: 'Mothers name' },
     { id: 'address', label: 'Address' },

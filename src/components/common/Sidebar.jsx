@@ -22,6 +22,7 @@ import {
   MenuBook as ClassesIcon,
   Settings as SettingsIcon,
   Dashboard as DashboardIcon,
+  AssignmentTurnedIn as AttendanceIcon,
 } from '@mui/icons-material';
 
 // ------------------------------------------------------------
@@ -46,6 +47,7 @@ const Sidebar = ({
     { text: 'Analytics', icon: <DashboardIcon />, path: '/' },
     { text: 'Teachers', icon: <TeachersIcon />, path: '/teachers' },
     { text: 'Students', icon: <TeachersIcon />, path: '/students' },
+    { text: 'Attendance', icon: <AttendanceIcon />, path: '/attendance' },
     { text: 'Classes', icon: <ClassesIcon />, path: '/classes' },
     { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
   ];
@@ -53,19 +55,18 @@ const Sidebar = ({
   // Different drawer styles based on screen size and open state
   const getDrawerStyle = () => {
     if (isMobile) {
-      return {
-        // display: open ? 'block' : 'none',
-        '& .MuiDrawer-paper': {
-          width: drawerWidth,
-          boxSizing: 'border-box',
-          transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-          }),
-          transform: !open && `translateX(-100%)`,
-        },
-      };
-    } else {
+      // display: open ? 'block' : 'none',
+      return {'& .MuiDrawer-paper': {
+        width: drawerWidth,
+        boxSizing: 'border-box',
+        transition: theme.transitions.create('width', {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+        transform: !open && `translateX(-100%)`,
+      }}
+    }
+    else {
       // Desktop - either full width or mini width
       return {
         width: open ? drawerWidth : miniDrawerWidth,

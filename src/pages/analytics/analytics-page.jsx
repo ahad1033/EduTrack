@@ -14,6 +14,7 @@ import {
 } from '@mui/icons-material';
 
 import CustomHelmet from '../../components/custom-components/helmet/custom-helmet';
+import CustomCardHeader from '../../components/custom-components/card-header/custom-card-header';
 
 // ------------------------------------------------------------
 
@@ -50,12 +51,10 @@ const Analytics = () => {
     <Box>
       <CustomHelmet title="Analytics" />
 
-      <Typography variant="h4" gutterBottom fontWeight="bold">
-        Analytics Dashboard
-      </Typography>
-      <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-        Overview of school statistics and performance metrics
-      </Typography>
+      <CustomCardHeader
+        title="Analytics Dashboard"
+        subheader="Overview of school statistics and performance metrics"
+      />
 
       <Grid container spacing={3}>
         {stats.map((stat, index) => (

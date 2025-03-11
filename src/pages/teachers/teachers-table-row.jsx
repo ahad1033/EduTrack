@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import toast from 'react-hot-toast';
 
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import TableRow from '@mui/material/TableRow';
@@ -11,11 +12,12 @@ import { useBoolean, useRouter } from '../../hooks';
 
 import Iconify from '../../components/iconify/iconify';
 import ConfirmDialog from '../../components/confirm-dialog/confirm-dialog';
+import { ListItemText } from '@mui/material';
 
 // ------------------------------------------------------------
 
 const TeachersTableRow = ({ tableData }) => {
-  const { name, subject, phone, email, id } = tableData;
+  const { name, subject, phone, email, gender, id } = tableData;
 
   const confirmDelete = useBoolean();
 
@@ -38,26 +40,39 @@ const TeachersTableRow = ({ tableData }) => {
   return (
     <>
       <TableRow>
-        <TableCell>{name}</TableCell>
+        <TableCell>
+          <ListItemText
+            primary={name}
+            secondary={email}
+            primaryTypographyProps={{ variant: 'body1' }}
+            secondaryTypographyProps={{
+              color: 'text.disabled',
+              variant: 'body2',
+              sx: { paddingLeft: 0.5, marginTop: 0.5 },
+            }}
+          />
+        </TableCell>
+
+        <TableCell>{gender === 'male' ? 'Male' : 'Female'}</TableCell>
 
         <TableCell>{subject}</TableCell>
 
         <TableCell>{phone}</TableCell>
 
-        <TableCell>{email}</TableCell>
-
         <TableCell align="right">
-          <Tooltip title="Edit Details" placement="top">
-            <IconButton color="inherit" onClick={handleEdit}>
-              <Iconify icon="solar:pen-bold" />
-            </IconButton>
-          </Tooltip>
+          <Box display="flex" justifyContent="flex-end">
+            <Tooltip title="Edit Details" placement="top">
+              <IconButton color="inherit" onClick={handleEdit}>
+                <Iconify icon="solar:pen-bold" />
+              </IconButton>
+            </Tooltip>
 
-          <Tooltip title="Delete" placement="top">
-            <IconButton color="error" onClick={confirmDelete.onTrue}>
-              <Iconify icon="solar:trash-bin-trash-bold" />
-            </IconButton>
-          </Tooltip>
+            <Tooltip title="Delete" placement="top">
+              <IconButton color="error" onClick={confirmDelete.onTrue}>
+                <Iconify icon="solar:trash-bin-trash-bold" />
+              </IconButton>
+            </Tooltip>
+          </Box>
         </TableCell>
       </TableRow>
 

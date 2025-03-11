@@ -27,9 +27,9 @@ const Teachers = () => {
   // Define table columns
   const columns = [
     { id: 'name', label: 'Name' },
+    { id: 'gender', label: 'Gender' },
     { id: 'subject', label: 'Subject' },
     { id: 'phone', label: 'Phone' },
-    { id: 'email', label: 'Email' },
     { id: 'actions', label: 'Actions', align: 'right' },
   ];
 

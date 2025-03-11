@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './theme/ThemeProvider';
 
 import { MainLayout } from './layouts';
+import { StudentAttendance } from './pages/attendance';
 import { StudentsForm, StudentsList } from './pages/students';
 import { TeachersForm, TeachersList } from './pages/teachers';
 
@@ -32,6 +33,10 @@ function App() {
 
             {/* SETTINGS */}
             <Route path="settings" element={<Navigate to="/" />} />
+
+            {/* ATTENDANCE */}
+            <Route path="attendance" element={<StudentAttendance />} />
+
             {/* 404 */}
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
