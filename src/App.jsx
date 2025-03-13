@@ -7,6 +7,8 @@ import { StudentsForm, StudentsList } from './pages/students';
 import { TeachersForm, TeachersList } from './pages/teachers';
 
 import Analytics from './pages/analytics/analytics-page';
+import LoginPage from './pages/auth/login/login-page';
+import ChangePassword from './pages/auth/change-password/change-password';
 
 // ------------------------------------------------------------
 
@@ -40,6 +42,12 @@ function App() {
             {/* 404 */}
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
+
+          {/* LOGIN */}
+          <Route path="/login" element={<LoginPage />} />
+
+          {/* CHANGE PASSWORD */}
+          <Route path="/change-password" element={<ChangePassword />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

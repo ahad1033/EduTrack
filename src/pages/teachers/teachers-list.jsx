@@ -10,7 +10,6 @@ import TableContainer from '@mui/material/TableContainer';
 import InputAdornment from '@mui/material/InputAdornment';
 
 import { useRouter } from '../../hooks';
-
 import { TEACHERS_DATA } from '../../_mock/teachersData';
 
 import TeachersTableRow from './teachers-table-row';
