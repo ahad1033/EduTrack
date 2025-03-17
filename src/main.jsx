@@ -1,16 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
 
-import { HelmetProvider } from 'react-helmet-async';
+import { Provider } from 'react-redux';
 import { CssBaseline } from '@mui/material';
+import { persistor, store } from './redux/store';
+import { HelmetProvider } from 'react-helmet-async';
+import { PersistGate } from 'redux-persist/integration/react';
+
+import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
-      <CssBaseline />
-      <App />
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <CssBaseline />
+          <App />
+        </PersistGate>
+      </Provider>
     </HelmetProvider>
   </React.StrictMode>
 );

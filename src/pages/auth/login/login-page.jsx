@@ -10,9 +10,13 @@ import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { RHFTextField } from '../../../components/hook-form';
+import { useLoginMutation } from '../../../redux/features/auth/authApi';
 
 import FormProvider from '../../../components/hook-form/form-provider';
 import CustomHelmet from '../../../components/custom-components/helmet/custom-helmet';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../../redux/features/auth/authSlice';
+import { verifyToken } from '../../../utils/verifyToken';
 
 // ----------------------------------------------------------------------
 const LoginSchema = Yup.object().shape({
@@ -23,6 +27,13 @@ const LoginSchema = Yup.object().shape({
 // ----------------------------------------------------------------------
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
+
+  const [login, { data, isLoading, error }] = useLoginMutation();
+
+  console.log('data: ', data);
+  console.log('error: ', error);
+
   const methods = useForm({
     resolver: yupResolver(LoginSchema),
     defaultValues: {
@@ -40,7 +51,11 @@ const LoginPage = () => {
   const isFormFilled = watch('email') && watch('password');
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log('data: ', data);
+    const response = await login(data).unwrap();
+
+    const user = await verifyToken(response?.data?.accessToken);
+
+    dispatch(setUser({ user, token: response?.data?.accessToken }));
   });
 
   return (
@@ -109,8 +124,8 @@ const LoginPage = () => {
                   type="submit"
                   color="success"
                   variant="contained"
-                  loading={isSubmitting}
-                  disabled={!isFormFilled}
+                  loading={isLoading || isSubmitting}
+                  disabled={!isFormFilled || isSubmitting || isLoading}
                 >
                   Login
                 </LoadingButton>
