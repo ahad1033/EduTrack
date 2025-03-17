@@ -1,6 +1,9 @@
 import * as Yup from 'yup';
-import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Box from '@mui/material/Box';
@@ -9,14 +12,14 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 
+import { verifyToken } from '../../../utils/verifyToken';
 import { RHFTextField } from '../../../components/hook-form';
+
 import { useLoginMutation } from '../../../redux/features/auth/authApi';
+import { setUser } from '../../../redux/features/auth/authSlice';
 
 import FormProvider from '../../../components/hook-form/form-provider';
 import CustomHelmet from '../../../components/custom-components/helmet/custom-helmet';
-import { useDispatch } from 'react-redux';
-import { setUser } from '../../../redux/features/auth/authSlice';
-import { verifyToken } from '../../../utils/verifyToken';
 
 // ----------------------------------------------------------------------
 const LoginSchema = Yup.object().shape({
@@ -29,10 +32,9 @@ const LoginSchema = Yup.object().shape({
 const LoginPage = () => {
   const dispatch = useDispatch();
 
-  const [login, { data, isLoading, error }] = useLoginMutation();
+  const navigate = useNavigate();
 
-  console.log('data: ', data);
-  console.log('error: ', error);
+  const [login, { data, isLoading, error }] = useLoginMutation();
 
   const methods = useForm({
     resolver: yupResolver(LoginSchema),
@@ -51,11 +53,28 @@ const LoginPage = () => {
   const isFormFilled = watch('email') && watch('password');
 
   const onSubmit = handleSubmit(async (data) => {
-    const response = await login(data).unwrap();
+    const loadingToastId = toast.loading('Logging in...');
+    try {
+      const response = await login(data).unwrap();
 
-    const user = await verifyToken(response?.data?.accessToken);
+      if (response.success) {
+        const user = await verifyToken(response?.data?.accessToken);
 
-    dispatch(setUser({ user, token: response?.data?.accessToken }));
+        dispatch(setUser({ user, token: response?.data?.accessToken }));
+
+        toast.success(response.message || 'Logged in successfully!', {
+          id: loadingToastId,
+        });
+
+        navigate('/', { replace: true });
+      }
+    } catch (err) {
+      toast.error(err?.data?.error || 'Login failed. Please try again.', {
+        id: loadingToastId,
+      });
+    } finally {
+      toast.dismiss(loadingToastId);
+    }
   });
 
   return (

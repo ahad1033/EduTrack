@@ -16,6 +16,8 @@ import { baseApi } from './api/base-api';
 
 import authReducer from './features/auth/authSlice';
 
+// ----------------------------------------------------------------------
+
 const persistConfig = {
   key: 'auth',
   storage,

@@ -1,5 +1,6 @@
+import { Toaster } from 'react-hot-toast';
+import { ThemeProvider, useThemeMode } from './theme/ThemeProvider';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ThemeProvider } from './theme/ThemeProvider';
 
 import { MainLayout } from './layouts';
 import { StudentAttendance } from './pages/attendance';
@@ -13,8 +14,21 @@ import ChangePassword from './pages/auth/change-password/change-password';
 // ------------------------------------------------------------
 
 function App() {
+  const { isDarkMode } = useThemeMode();
+
   return (
     <ThemeProvider>
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          style: {
+            background: isDarkMode ? '#333' : '#fff',
+            color: isDarkMode ? '#fff' : '#333',
+          },
+          duration: 3000,
+        }}
+      />
+      
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainLayout />}>

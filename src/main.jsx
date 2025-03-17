@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import { Provider } from 'react-redux';
+import { Toaster } from 'react-hot-toast';
 import { CssBaseline } from '@mui/material';
 import { persistor, store } from './redux/store';
 import { HelmetProvider } from 'react-helmet-async';

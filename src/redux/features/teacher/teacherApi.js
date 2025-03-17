@@ -3,16 +3,15 @@ import { API_ENDPOINTS } from '../../../utils/api-endpoints';
 
 // ----------------------------------------------------------------------
 
-const authApi = baseApi.injectEndpoints({
+const teacherApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.mutation({
-      query: (credentials) => ({
-        url: API_ENDPOINTS.LOGIN,
-        method: 'POST',
-        body: credentials,
+    getAllTeachers: builder.query({
+      query: () => ({
+        url: API_ENDPOINTS.GET_ALL_TEACHERS,
+        method: 'GET',
       }),
     }),
   }),
 });
 
-export const { useLoginMutation } = authApi;
+export const { useGetAllTeachersQuery } = teacherApi;

@@ -81,16 +81,6 @@ const MainLayout = () => {
           <Outlet />
         </Box>
       </Box>
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          style: {
-            background: isDarkMode ? '#333' : '#fff',
-            color: isDarkMode ? '#fff' : '#333',
-          },
-          duration: 3000,
-        }}
-      />
     </Box>
   );
 };

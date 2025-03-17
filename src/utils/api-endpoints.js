@@ -4,8 +4,8 @@ export const API_BASE_URL = 'http://localhost:5000/api/v1';
 
 export const API_ENDPOINTS = {
   LOGIN: `${API_BASE_URL}/auth/login`,
-  CHANGE_PASSWORD: `${API_BASE_URL}/change-password`,
-  ACCESS_TOKEN: `${API_BASE_URL}/access-token`,
+  CHANGE_PASSWORD: `${API_BASE_URL}/auth/change-password`,
+  REFRESH_TOKEN: `${API_BASE_URL}/auth/refresh-token`,
   //
   CREATE_TEACHERS: `${API_BASE_URL}/teachers/create-teacher`,
   GET_ALL_TEACHERS: `${API_BASE_URL}/teachers/get-all-teachers`,

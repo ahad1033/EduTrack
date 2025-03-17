@@ -17,11 +17,16 @@ import Iconify from '../../components/iconify/iconify';
 import CustomTableHead from '../../components/table/custom-table-head';
 import CustomHelmet from '../../components/custom-components/helmet/custom-helmet';
 import CustomCardHeader from '../../components/custom-components/card-header/custom-card-header';
+import { useGetAllTeachersQuery } from '../../redux/features/teacher/teacherApi';
 
 // ------------------------------------------------------------
 
 const Teachers = () => {
   const router = useRouter();
+
+  const { data: teachersData, isLoading, error } = useGetAllTeachersQuery();
+
+  console.log('teachersData: ', teachersData);
 
   // Define table columns
   const columns = [
