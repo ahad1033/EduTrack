@@ -8,9 +8,9 @@ import TableBody from '@mui/material/TableBody';
 import TextField from '@mui/material/TextField';
 import TableContainer from '@mui/material/TableContainer';
 import InputAdornment from '@mui/material/InputAdornment';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { useRouter } from '../../hooks';
-import { TEACHERS_DATA } from '../../_mock/teachersData';
 
 import TeachersTableRow from './teachers-table-row';
 import Iconify from '../../components/iconify/iconify';
@@ -85,15 +85,28 @@ const Teachers = () => {
         />
 
         <TableContainer>
-          <Table>
-            <CustomTableHead columns={columns} />
+          {isLoading ? (
+            <Box
+              sx={{
+                my: 20,
+                display: 'flex',
+                alignContent: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <CircularProgress size={40} />
+            </Box>
+          ) : (
+            <Table>
+              <CustomTableHead columns={columns} />
 
-            <TableBody>
-              {TEACHERS_DATA.map((teacher) => (
-                <TeachersTableRow key={teacher.id} tableData={teacher} />
-              ))}
-            </TableBody>
-          </Table>
+              <TableBody>
+                {teachersData?.data?.map((teacher) => (
+                  <TeachersTableRow key={teacher.id} tableData={teacher} />
+                ))}
+              </TableBody>
+            </Table>
+          )}
         </TableContainer>
       </Card>
     </Box>
