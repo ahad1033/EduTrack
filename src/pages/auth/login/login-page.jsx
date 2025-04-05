@@ -51,7 +51,6 @@ const LoginPage = () => {
   } = methods;
 
   const isFormFilled = watch('email') && watch('password');
-
   const onSubmit = handleSubmit(async (data) => {
     const loadingToastId = toast.loading('Logging in...');
     try {
@@ -66,12 +65,16 @@ const LoginPage = () => {
           id: loadingToastId,
         });
 
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
         navigate('/', { replace: true });
       }
     } catch (err) {
       toast.error(err?.data?.error || 'Login failed. Please try again.', {
         id: loadingToastId,
       });
+
+      await new Promise((resolve) => setTimeout(resolve, 1500));
     } finally {
       toast.dismiss(loadingToastId);
     }
